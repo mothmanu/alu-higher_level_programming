@@ -4,4 +4,4 @@ for i in range(10):
 for i in range(12,89):
     if i % 11 != 0 or i % 10 != 0:
         print("{:2d, }".format(i), end = "") 
-print("{:d}".format(89)
+print("{:d}".format(89))
