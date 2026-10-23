@@ -1,14 +1,13 @@
 #!/usr/bin/python3
 if __name__ == "__main__":
-    if len(argv) == 0:
+    from sys import argv
+    count = len(argv) - 1
+    if count == 0:
         print("0 arguments.")
+    elif count == 1:
+        print("1 argument:")
     else:
-        count = 1
-        for str in argv:
-            if str == " ":
-                index = str.find(" ")
-                word = argv[:index+1]
-                print("{:d}: {}".format(count, word))
-                count += 1
-                argv.replace(word,"")
+        print("{:d} arguments:".format(count))
+    for i in range(1, count + 1):
+        print("{:d}: {}".format(i, argv[i]))
             
