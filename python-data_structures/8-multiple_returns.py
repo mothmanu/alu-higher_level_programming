@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 def multiple_returns(sentence):
     new_tuple = ()
-    if sentence is None:
+    if sentence == "":
         first_char = None
     else:
         for char in sentence:
