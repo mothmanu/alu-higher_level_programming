@@ -2,5 +2,7 @@
 def print_matrix_integer(matrix=[[]]):
     for my_list in matrix:
         for num in my_list:
-            print("{:d} ".format(num), end="")
+            if num != my_list[0]:
+                print(" ", end="")
+            print("{:d}".format(num), end="")
         print("")
