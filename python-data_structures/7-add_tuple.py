@@ -2,9 +2,10 @@
 def add_tuple(tuple_a=(), tuple_b=()):
     new_tuple = ()
     if len(tuple_a) < 2:
-        for i in range(2):
-            if tuple_a[i] is None:
-                tuple_a[i] = 0
+        if len(tuple_a) == 0:
+            tuple_a = (0,0)
+        else:
+            tuple_a = (tuple_a[0], 0)
     elif len(tuple_b) < 2:
         for i in range(2):
             if tuple_b[i] is None:
