@@ -4,9 +4,9 @@ def roman_to_int(roman_string):
     if roman_string is None:
         return 0
     num = 0
-    for i in range(len(roman_string)):
-        if roman_string[i] < roman_string[i+1]:
-            num = numerals[roman_string[i+1]] - numerals[roman_string[i]]
-        else:
-            num += numerals[roman_string[i]]
+    if ord(roman_string[0]) < ord(roman_string[1]):
+        num = numerals[roman_string[1]] - numerals[roman_string[0]]
+    else:
+        for char in roman_string:
+            num += numerals[char]
     return num
