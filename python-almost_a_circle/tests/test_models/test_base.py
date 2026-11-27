@@ -160,6 +160,49 @@ class TestSaveAndLoad(unittest.TestCase):
         with open("Square.json", "r") as f:
             self.assertEqual(f.read(), "[]")
 
+    def test_save_none_square(self):
+        """Saving None for squares writes an empty list."""
+        Square.save_to_file(None)
+        with open("Square.json", "r") as f:
+            self.assertEqual(f.read(), "[]")
+
+    def test_save_empty_rectangle(self):
+        """Saving an empty list for rectangles writes an empty list."""
+        Rectangle.save_to_file([])
+        with open("Rectangle.json", "r") as f:
+            self.assertEqual(f.read(), "[]")
+
+    def test_save_none_overwrites(self):
+        """Saving None replaces old contents with an empty list."""
+        Square.save_to_file([Square(1)])
+        Square.save_to_file(None)
+        with open("Square.json", "r") as f:
+            self.assertEqual(f.read(), "[]")
+        Rectangle.save_to_file([Rectangle(1, 1)])
+        Rectangle.save_to_file(None)
+        with open("Rectangle.json", "r") as f:
+            self.assertEqual(f.read(), "[]")
+
+    def test_save_square_overwrites(self):
+        """Saving squares again replaces the old contents."""
+        Square.save_to_file([Square(1), Square(2)])
+        Square.save_to_file([Square(3)])
+        self.assertEqual(len(self.read("Square.json")), 1)
+
+    def test_save_square_type(self):
+        """The file written for squares holds a JSON string."""
+        Square.save_to_file([Square(2, 1, 1, 4)])
+        with open("Square.json", "r") as f:
+            self.assertEqual(json.loads(f.read()),
+                             [{"id": 4, "size": 2, "x": 1, "y": 1}])
+
+    def test_load_empty_file(self):
+        """A file holding an empty list loads as an empty list."""
+        Rectangle.save_to_file([])
+        self.assertEqual(Rectangle.load_from_file(), [])
+        Square.save_to_file(None)
+        self.assertEqual(Square.load_from_file(), [])
+
     def test_save_overwrites(self):
         """Saving again replaces the old contents."""
         Rectangle.save_to_file([Rectangle(1, 2), Rectangle(3, 4)])
